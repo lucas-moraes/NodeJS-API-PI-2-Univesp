@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "jest --coverage --watchAll",
+    "test": "jest --watchAll",
     "dev": "nodemon server.js",
     "start": "nodemon ./server.js"
   },
