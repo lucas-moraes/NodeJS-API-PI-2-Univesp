@@ -7,25 +7,19 @@ require("dotenv").config();
 class App {
   constructor() {
     this.express = express();
-    this.expressJS();
-    this.middlewares();
-    this.mongoDB();
+    this.#expressJS();
+    this.#middlewares();
+    this.#mongoDB();
   }
 
-  middlewares() {
+  #middlewares() {
     this.express.use(cors({ origin: "*" }));
     this.express.use(express.json());
     this.express.use(express.urlencoded({ extended: false }));
     this.express.use(fileUpload());
   }
 
-  expressJS() {
-    this.express.listen("3003", () => {
-      console.log(`It's running on port 3003.`);
-    });
-  }
-
-  async mongoDB() {
+  async #mongoDB() {
     await mongoose
       .connect(process.env.MONGO_DB, {
         useNewUrlParser: true,
@@ -36,6 +30,12 @@ class App {
         console.log("MongoDB Connected!");
       })
       .catch((err) => console.error(err));
+  }
+
+  #expressJS() {
+    this.express.listen("3003", () => {
+      console.log(`It's running on port 3003.`);
+    });
   }
 }
 
