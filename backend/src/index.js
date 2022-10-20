@@ -21,7 +21,7 @@ class App {
 
   expressJS() {
     this.express.listen("3003", () => {
-      console.info(`It's running on port 3003.`);
+      console.log(`It's running on port 3003.`);
     });
   }
 
@@ -33,7 +33,7 @@ class App {
         dbName: "Holes",
       })
       .then(() => {
-        console.info("MongoDB Connected!");
+        console.log("MongoDB Connected!");
       })
       .catch((err) => console.error(err));
   }

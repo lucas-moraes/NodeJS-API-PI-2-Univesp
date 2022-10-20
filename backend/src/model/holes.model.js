@@ -13,6 +13,7 @@ const StreetHoleSchema = new Schema({
     data: Buffer,
     contentType: String,
   },
+  closed: Boolean,
 });
 
 module.exports = new mongoose.model("Holes", StreetHoleSchema, "streetHoles");

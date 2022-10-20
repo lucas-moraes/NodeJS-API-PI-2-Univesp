@@ -10,7 +10,7 @@ class Server {
 
   checkApp() {
     this.app.get("/checkHealth", (req, res) => {
-      res.json({ message: "API It's running !!!" });
+      return res.json({ message: "API It's running !!!" });
     });
   }
 }
