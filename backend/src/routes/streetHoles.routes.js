@@ -4,10 +4,12 @@ module.exports = (app) => {
   let router = require("express").Router();
 
   router.post("/create", streetHoleController.create);
+  router.put("/update", streetHoleController.update);
   router.delete("/deleteOne", streetHoleController.deleteOne);
   router.delete("/deleteMany", streetHoleController.deleteMany);
-  router.patch("/update/:id", streetHoleController.update);
+  router.patch("/closeHole/:id", streetHoleController.closeHole);
   router.get("/findAll", streetHoleController.findAll);
+  router.get("/findOne", streetHoleController.findOne);
 
   app.use("/api/streetHole", router);
 };

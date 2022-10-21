@@ -8,7 +8,6 @@ class StreetHoleController {
       res.status(200).send({ message: "Registro cadastrado com sucesso" });
     } catch (err) {
       res.status(204).sed({ message: "Ocorreu um erro no cadastro" });
-      console.error(err);
     }
   }
 
@@ -36,7 +35,20 @@ class StreetHoleController {
 
   async findAll(req, res) {
     try {
-      streetHoleServices.findAll().then((response) => res.status(200).send(response));
+      streetHoleServices.findAll().then((response) => {
+        res.status(200).send(response);
+      });
+    } catch (err) {
+      res.status(204).send({ message: "Ocorreu um erro na consulta de dados" });
+      console.error(err);
+    }
+  }
+
+  async findOne(req, res) {
+    try {
+      streetHoleServices.findOne(req).then((response) => {
+        res.status(200).send(response);
+      });
     } catch (err) {
       res.status(204).send({ message: "Ocorreu um erro na consulta de dados" });
       console.error(err);
@@ -44,9 +56,21 @@ class StreetHoleController {
   }
 
   async update(req, res) {
+    const { body, files } = req;
+    try {
+      streetHoleServices.update(body, files).then((response) => {
+        if (response.acknowledged) res.status(200).send({ message: "Atualização realizada com sucesso" });
+      });
+    } catch (err) {
+      res.status(204).send({ message: "Ocorreu um erro na atualização dos dados" });
+      console.error(err);
+    }
+  }
+
+  async closeHole(req, res) {
     const { id } = req.params;
     try {
-      streetHoleServices.update(id).then((response) => {
+      streetHoleServices.closeHole(id).then((response) => {
         if (response.acknowledged) res.status(200).send({ message: "Atualização realizada com sucesso" });
       });
     } catch (err) {
