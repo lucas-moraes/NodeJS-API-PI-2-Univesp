@@ -30,7 +30,7 @@ describe("streetHole Tests", () => {
         longitude: "JEST",
       })
       .expect(200);
-  });
+  }, 60000);
 
   it("/DELETEONE => Delete one register", async () => {
     return await request(server.app)
