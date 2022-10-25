@@ -25,11 +25,11 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#7d5f5d",
         "resizeMode": "contain"
-      }
+      },
+      "package": "com.streetHoles.mobile"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     }
-
   }
 }

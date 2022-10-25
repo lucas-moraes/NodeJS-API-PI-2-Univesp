@@ -1,8 +1,9 @@
 export const THEME = {
   COLORS: {
-    BACKGROUND_900: "#4b3937",
+    BACKGROUND_900: "#3c2d2c",
     BACKGROUND_800: "#644c4a",
     BACKGROUND_700: "#6e605e",
+    BACKGROUND_200: "#fafaf9",
 
     TEXT: "#dbd7d7",
 

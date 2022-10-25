@@ -3,7 +3,7 @@ import { StyleSheet, Animated, Text, SafeAreaView, View, TouchableOpacity } from
 import { Plus } from "phosphor-react-native";
 import { THEME } from "../../theme";
 
-export function ButtonMenu() {
+export function ButtonMenu(props) {
   const [buttonColor, setButtonColor] = useState(THEME.COLORS.BACKGROUND_700);
   const [isOpen, setIsOpen] = useState(false);
   const fade = useRef(new Animated.Value(0)).current;
@@ -24,7 +24,7 @@ export function ButtonMenu() {
         useNativeDriver: true,
       }).start();
 
-      setButtonColor(THEME.COLORS.BACKGROUND_800);
+      setButtonColor(THEME.COLORS.BACKGROUND_900);
     }
     if (isOpen) {
       setIsOpen(false);
@@ -61,35 +61,42 @@ export function ButtonMenu() {
     <SafeAreaView style={styles.container}>
       <Animated.View style={{ opacity: fade }}>
         <View style={styles.containerItems}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => props.onPressed()}>
             <Text style={styles.items}>Registrar buraco</Text>
           </TouchableOpacity>
         </View>
       </Animated.View>
-      <View>
-        <TouchableOpacity style={[styles.button, { backgroundColor: buttonColor }]} onPressIn={() => HandleClick()}>
-          <Animated.View style={animatedStyle}>
-            <Plus color={THEME.COLORS.PRIMARY} size={32} weight={"bold"} />
-          </Animated.View>
-        </TouchableOpacity>
-      </View>
+
+      <TouchableOpacity style={[styles.button, { backgroundColor: buttonColor }]} onPressIn={() => HandleClick()}>
+        <Animated.View style={animatedStyle}>
+          <Plus color={THEME.COLORS.PRIMARY} size={32} weight={"bold"} />
+        </Animated.View>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: THEME.COLORS.BACKGROUND_800,
+    width: 250,
+    height: 20,
+    flexDirection: "row",
     alignItems: "flex-end",
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    marginRight: 20,
+    marginBottom: 20,
   },
   containerItems: {
     width: 250,
-    height: 55,
+    height: 60,
     justifyContent: "center",
     backgroundColor: THEME.COLORS.BACKGROUND_700,
     borderBottomRightRadius: 30,
     borderTopRightRadius: 30,
-    margin: 30,
+    borderBottomLeftRadius: 5,
+    borderTopLeftRadius: 5,
   },
   items: {
     fontSize: THEME.FONT_SIZE.MD,
@@ -102,10 +109,11 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 100,
     position: "absolute",
-    margin: 32,
+    marginRight: 6,
+    marginBottom: 5,
     bottom: 0,
     right: 0,
-    borderRadius: 100,
   },
 });
