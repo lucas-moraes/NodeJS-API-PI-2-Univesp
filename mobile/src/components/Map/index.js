@@ -1,26 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MapView, { Marker } from "react-native-maps";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
-// import { MAPBOX_TOKEN } from "@env";
+import { StyleSheet, View, Dimensions } from "react-native";
+import { MapPin } from "../svg/index";
 
-export const Map = () => {
+export const Map = (props) => {
+  const defaultRegion = {
+    latitude: -23.5810435,
+    longitude: -46.5218548,
+    latitudeDelta: 0.2,
+    longitudeDelta: 0.2,
+  };
+  const [locale, setLocale] = useState(defaultRegion);
+  const [newHole, setNewHole] = useState(false);
+
+  useEffect(() => {
+    if (props.newLocale) {
+      setLocale({
+        latitude: props.newLocale.center[1],
+        longitude: props.newLocale.center[0],
+        latitudeDelta: 0.001,
+        longitudeDelta: 0.001,
+      });
+      setNewHole(true);
+    }
+  }, [props.newLocale]);
+
   return (
     <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      >
-        <Marker
-          key={0}
-          coordinate={{ latitude: 37.78825, longitude: -122.4324 }}
-          title={"verruga"}
-          description={"branca"}
-        />
+      <MapView style={styles.map} key={props.newLocale} region={locale}>
+        {props.locales?.map((item, index) => {
+          return (
+            <Marker key={index + 1} coordinate={{ latitude: Number(item.latitude), longitude: Number(item.longitude) }}>
+              <MapPin stroke={"#000"} fill={"#ff3232"} />
+            </Marker>
+          );
+        })}
+        {newHole && (
+          <Marker coordinate={{ latitude: locale.latitude, longitude: locale.longitude }}>
+            <MapPin stroke={"#000"} fill={"#3aff32"} />
+          </Marker>
+        )}
       </MapView>
     </View>
   );
