@@ -19,7 +19,7 @@ export const Map = (props) => {
         latitude: props.newLocale.center[1],
         longitude: props.newLocale.center[0],
         latitudeDelta: 0.001,
-        longitudeDelta: 0.001,
+        longitudeDelta: 0.005,
       });
       setNewHole(true);
     }

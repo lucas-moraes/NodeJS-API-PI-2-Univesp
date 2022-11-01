@@ -10,3 +10,7 @@ export const GetLocal = (address) => {
     `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}%20.json?limit=7&types=postcode%2Caddress&access_token=${TOKEN}`
   );
 };
+
+export const SendFormData = (data) => {
+  return Axios.post(`${LOCAL}:3003/api/streetHole/create`, data);
+};

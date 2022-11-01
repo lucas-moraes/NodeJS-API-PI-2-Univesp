@@ -1,26 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Modal,
-  Dimensions,
-  TextInput,
-  FlatList,
-  Animated,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Modal, Dimensions, TextInput, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { XCircle } from "phosphor-react-native";
 import { THEME } from "../../theme";
-import { GetLocal } from "../../services";
+import { GetLocal, SendFormData } from "../../services";
 
 export function ModalRegister(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [locales, setLocales] = useState("");
   const [showFlat, setShowFlat] = useState(false);
-  const [formData, setFormaData] = useState({ endereco: "", estado: "", cidade: "" });
-  const bottom = useRef(new Animated.Value(0)).current;
+  const [formData, setFormData] = useState({ endereco: "", cidade: "", estado: "", latitude: "", longitude: "" });
+  const [isSelectedLocale, setIsSelectedLocale] = useState(false);
 
   useEffect(() => {
     setModalVisible(props.openChildren);
@@ -41,43 +31,41 @@ export function ModalRegister(props) {
 
   function HandleSelectedLocale(index) {
     props.resLocale(locales[index]);
-    Animated.timing(bottom, {
-      toValue: 1,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-    setModalVisible(false);
+    setFormData({
+      ...formData,
+      endereco: locales[index].text,
+      cidade: locales[index].context[2].text,
+      estado: locales[index].context[3].text,
+      latitude: locales[index]["geometry"]["coordinates"][1],
+      longitude: locales[index]["geometry"]["coordinates"][0],
+    });
     setShowFlat(false);
+    setIsSelectedLocale(true);
+  }
+
+  function HandleSendFormData() {
+    SendFormData(formData)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
   }
 
   return (
     <Modal animationType="fade" transparent={true} visible={modalVisible}>
       <SafeAreaView style={styles.container}>
-        <Animated.View
-          style={{
-            transform: [
-              {
-                translateY: bottom.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, 600],
-                }),
-              },
-            ],
-          }}
-        >
-          <View style={styles.modal}>
-            <View style={styles.header}>
-              <Text style={styles.title}>Registrar buraco na via</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                  props.openParent(modalVisible);
-                }}
-              >
-                <XCircle color={THEME.COLORS.CAPTION_500} size={32} weight={"bold"} />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.body}>
+        <View style={styles.modal}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Registrar buraco na via</Text>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible(!modalVisible);
+                props.openParent(modalVisible);
+              }}
+            >
+              <XCircle color={THEME.COLORS.CAPTION_500} size={32} weight={"bold"} />
+            </TouchableOpacity>
+          </View>
+          {!isSelectedLocale ? (
+            <View style={[styles.body, { height: 80 }]}>
               <TextInput
                 style={styles.input}
                 onChangeText={(text) => {
@@ -87,7 +75,7 @@ export function ModalRegister(props) {
                       .map((word) => word)
                       .join(" ")
                   );
-                  setFormaData({
+                  setFormData({
                     ...formData,
                     endereco: text
                       .split(" ")
@@ -100,8 +88,28 @@ export function ModalRegister(props) {
                 keyboardType="default"
               />
             </View>
-          </View>
-        </Animated.View>
+          ) : (
+            <View style={[styles.body, { height: 150 }]}>
+              <View style={styles.newBodyItems}>
+                <Text style={styles.textLabel}>Endereço: </Text>
+                <Text>{formData.endereco}</Text>
+              </View>
+              <View style={styles.newBodyItems}>
+                <Text style={styles.textLabel}>Cidade: </Text>
+                <Text>{formData.cidade}</Text>
+              </View>
+              <View style={styles.newBodyItems}>
+                <Text style={styles.textLabel}>Estado: </Text>
+                <Text>{formData.estado}</Text>
+              </View>
+              <TouchableOpacity onPress={() => HandleSendFormData()}>
+                <View style={styles.newView}>
+                  <Text style={styles.textTitle}>Registrar</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
         {showFlat && (
           <View style={{ height: 350 }}>
             <FlatList
@@ -133,7 +141,6 @@ const styles = StyleSheet.create({
     padding: 15,
     position: "relative",
     width: 350,
-    height: 150,
     marginTop: 20,
     marginBottom: 10,
     borderRadius: 10,
@@ -161,6 +168,9 @@ const styles = StyleSheet.create({
   body: {
     justifyContent: "flex-start",
   },
+  newBodyItems: {
+    flexDirection: "row",
+  },
   input: {
     height: 40,
     borderColor: THEME.COLORS.CAPTION_400,
@@ -186,5 +196,25 @@ const styles = StyleSheet.create({
   },
   buttonSelect: {
     margin: 10,
+  },
+  textLabel: {
+    fontSize: THEME.FONT_SIZE.MD,
+    fontFamily: THEME.FONT_FAMILY.BOLD,
+  },
+  textContext: {
+    fontSize: THEME.FONT_SIZE.MD,
+    fontFamily: THEME.FONT_FAMILY.REGULAR,
+  },
+  textTitle: {
+    color: THEME.COLORS.TEXT,
+  },
+  newView: {
+    backgroundColor: THEME.COLORS.BACKGROUND_700,
+    marginTop: 15,
+    borderRadius: 10,
+    width: "100%",
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
