@@ -17,10 +17,10 @@ class streetHoleServices {
     this.#StreetHolesModel.cidade = body.cidade;
     this.#StreetHolesModel.latitude = body.latitude;
     this.#StreetHolesModel.longitude = body.longitude;
-    this.#StreetHolesModel.imagem = {
-      data: file.imagem.data,
-      contentType: file.imagem.mimetype,
-    };
+    // this.#StreetHolesModel.imagem = {
+    //   data: file.imagem.data,
+    //   contentType: file.imagem.mimetype,
+    // };
     this.#StreetHolesModel.closed = false;
 
     const hole = Holes(this.#StreetHolesModel);
