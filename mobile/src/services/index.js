@@ -1,16 +1,28 @@
-import Axios from "axios";
-import { LOCAL, TOKEN } from "@env";
+import axios from 'axios';
+import {LOCAL, GOOGLE_TOKEN} from '@env';
 
-export const FindAll = () => {
-  return Axios.get(`${LOCAL}:3003/api/streetHole/findAll`);
-};
+export function FindAll() {
+  return axios.get('https://pi-2-2022.onrender.com/api/streetHole/findAll');
+}
 
-export const GetLocal = (address) => {
-  return Axios.get(
-    `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}%20.json?limit=7&types=postcode%2Caddress&access_token=${TOKEN}`
-  );
-};
+export function GetLocal(address) {
+  const params = new URLSearchParams({
+    input: address,
+    key: GOOGLE_TOKEN,
+  });
+  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?${params}`;
+  return axios.get(url);
+}
 
-export const SendFormData = (data) => {
-  return Axios.post(`${LOCAL}:3003/api/streetHole/create`, data);
-};
+export function GetGeocode(address) {
+  const params = new URLSearchParams({
+    address: address,
+    key: GOOGLE_TOKEN,
+  });
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?${params}`;
+  return axios.post(url);
+}
+
+export function SendFormData(data) {
+  return axios.post(`${LOCAL}/api/streetHole/create`, data);
+}

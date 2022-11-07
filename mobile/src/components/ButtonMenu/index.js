@@ -1,7 +1,14 @@
-import React, { useState, useRef } from "react";
-import { StyleSheet, Animated, Text, SafeAreaView, View, TouchableOpacity } from "react-native";
-import { Plus } from "phosphor-react-native";
-import { THEME } from "../../theme";
+import React, {useState, useRef} from 'react';
+import {
+  StyleSheet,
+  Animated,
+  Text,
+  SafeAreaView,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import {Plus} from 'phosphor-react-native';
+import {THEME} from '@themes';
 
 export function ButtonMenu(props) {
   const [buttonColor, setButtonColor] = useState(THEME.COLORS.BACKGROUND_700);
@@ -46,7 +53,7 @@ export function ButtonMenu(props) {
 
   const interpolateRotating = xRoll.interpolate({
     inputRange: [0, 1],
-    outputRange: ["0deg", "45deg"],
+    outputRange: ['0deg', '45deg'],
   });
 
   const animatedStyle = {
@@ -59,7 +66,7 @@ export function ButtonMenu(props) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Animated.View style={{ opacity: fade }}>
+      <Animated.View style={{opacity: fade}}>
         <View style={styles.containerItems}>
           <TouchableOpacity onPress={() => props.onPressed()}>
             <Text style={styles.items}>Registrar buraco</Text>
@@ -67,9 +74,11 @@ export function ButtonMenu(props) {
         </View>
       </Animated.View>
 
-      <TouchableOpacity style={[styles.button, { backgroundColor: buttonColor }]} onPressIn={() => HandleClick()}>
+      <TouchableOpacity
+        style={[styles.button, {backgroundColor: buttonColor}]}
+        onPressIn={() => HandleClick()}>
         <Animated.View style={animatedStyle}>
-          <Plus color={THEME.COLORS.PRIMARY} size={32} weight={"bold"} />
+          <Plus color={THEME.COLORS.PRIMARY} size={32} weight={'bold'} />
         </Animated.View>
       </TouchableOpacity>
     </SafeAreaView>
@@ -80,9 +89,9 @@ const styles = StyleSheet.create({
   container: {
     width: 250,
     height: 20,
-    flexDirection: "row",
-    alignItems: "flex-end",
-    position: "absolute",
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    position: 'absolute',
     bottom: 0,
     right: 0,
     marginRight: 20,
@@ -91,7 +100,7 @@ const styles = StyleSheet.create({
   containerItems: {
     width: 250,
     height: 60,
-    justifyContent: "center",
+    justifyContent: 'center',
     backgroundColor: THEME.COLORS.BACKGROUND_700,
     borderBottomRightRadius: 30,
     borderTopRightRadius: 30,
@@ -100,17 +109,17 @@ const styles = StyleSheet.create({
   },
   items: {
     fontSize: THEME.FONT_SIZE.MD,
-    textAlignVertical: "center",
+    textAlignVertical: 'center',
     paddingLeft: 10,
     color: THEME.COLORS.PRIMARY,
   },
   button: {
     width: 50,
     height: 50,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 100,
-    position: "absolute",
+    position: 'absolute',
     marginRight: 6,
     marginBottom: 5,
     bottom: 0,
