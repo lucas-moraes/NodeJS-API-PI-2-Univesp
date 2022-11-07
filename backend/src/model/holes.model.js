@@ -5,8 +5,6 @@ const Schema = mongoose.Schema;
 const StreetHoleSchema = new Schema({
   id: String,
   endereco: String,
-  estado: String,
-  cidade: String,
   latitude: String,
   longitude: String,
   imagem: {

@@ -13,8 +13,6 @@ class streetHoleServices {
     if (body.id) this.#StreetHolesModel.id = body.id;
     else this.#StreetHolesModel.id = this.uuid;
     this.#StreetHolesModel.endereco = body.endereco;
-    this.#StreetHolesModel.estado = body.estado;
-    this.#StreetHolesModel.cidade = body.cidade;
     this.#StreetHolesModel.latitude = body.latitude;
     this.#StreetHolesModel.longitude = body.longitude;
     // this.#StreetHolesModel.imagem = {
@@ -36,8 +34,6 @@ class streetHoleServices {
   async update(body, file) {
     this.#id = body.id;
     this.#StreetHolesModel.endereco = body.endereco;
-    this.#StreetHolesModel.estado = body.estado;
-    this.#StreetHolesModel.cidade = body.cidade;
     this.#StreetHolesModel.latitude = body.latitude;
     this.#StreetHolesModel.longitude = body.longitude;
     this.#StreetHolesModel.imagem = {
