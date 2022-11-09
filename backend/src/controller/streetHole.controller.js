@@ -7,7 +7,7 @@ class StreetHoleController {
       streetHoleServices.create(body, files);
       res.status(200).send({ message: "Registro cadastrado com sucesso" });
     } catch (err) {
-      res.status(204).sed({ message: "Ocorreu um erro no cadastro" });
+      res.status(204).send({ message: "Ocorreu um erro no cadastro" });
     }
   }
 
@@ -17,7 +17,7 @@ class StreetHoleController {
       streetHoleServices.deleteOne(body);
       res.status(200).send({ message: "Registro excluído com sucesso" });
     } catch (err) {
-      res.status(204).sed({ message: "Ocorreu na exclusão no cadastro" });
+      res.status(204).send({ message: "Ocorreu na exclusão no cadastro" });
       console.error(err);
     }
   }
@@ -28,7 +28,7 @@ class StreetHoleController {
       streetHoleServices.deleteMany(body);
       res.status(200).send({ message: "Registro excluído com sucesso" });
     } catch (err) {
-      res.status(204).sed({ message: "Ocorreu na exclusão no cadastro" });
+      res.status(204).send({ message: "Ocorreu na exclusão no cadastro" });
       console.error(err);
     }
   }

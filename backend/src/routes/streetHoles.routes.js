@@ -1,7 +1,7 @@
 const streetHoleController = require("../controller/streetHole.controller.js");
 
 module.exports = (app) => {
-  let router = require("express").Router();
+  const router = require("express").Router();
 
   router.post("/create", streetHoleController.create);
   router.put("/update", streetHoleController.update);
