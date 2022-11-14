@@ -17,10 +17,6 @@ class UsersServices {
       return newUser;
     } catch (error) {
       throw error;
-    } finally {
-      async () => {
-        await this.#prisma.$disconnect();
-      };
     }
   }
   async findUser(body) {
@@ -29,15 +25,26 @@ class UsersServices {
         where: {
           email: body.email,
         },
+        select: {
+          email: true,
+          password: true,
+        },
       });
-
       return findUser;
     } catch (error) {
       throw error;
-    } finally {
-      async () => {
-        await this.#prisma.$disconnect();
-      };
+    }
+  }
+  async deleteUser(body) {
+    try {
+      const deleteUser = await this.#prisma.users.delete({
+        where: {
+          email: body.email,
+        },
+      });
+      return deleteUser;
+    } catch (error) {
+      throw error;
     }
   }
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "dev": "nodemon server.js",
-    "start": "nodemon ./server.js"
+    "start": "npx prisma generate && nodemon ./server.js"
   },
   "author": "",
   "license": "ISC",

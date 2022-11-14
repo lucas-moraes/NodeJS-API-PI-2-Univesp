@@ -21,6 +21,18 @@ class UsersController {
       res.status(204).send({ message: "Ocorreu um erro no cadastro" });
     }
   }
+  async deleteUser(req, res) {
+    const { body } = req;
+    try {
+      const result = await UsersServices.deleteUser(body);
+      if (result) {
+        console.log(result);
+        res.status(200).send({ message: "Usuário deletado com sucesso !" });
+      }
+    } catch (error) {
+      res.status(204).send({ message: "Ocorreu um erro no cadastro" });
+    }
+  }
   async Login(req, res) {
     const { body } = req;
     try {
@@ -33,7 +45,7 @@ class UsersController {
       }
       res.status(204).send({ message: "Login não encontrado" });
     } catch (error) {
-      res.status(204).send({ message: "Ocorreu um erro no cadastro" });
+      res.status(204).send({ message: "Ocorreu um erro no login" });
     }
   }
 }

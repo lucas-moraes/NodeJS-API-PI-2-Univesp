@@ -36,10 +36,10 @@ class streetHoleServices {
     this.#StreetHolesModel.endereco = body.endereco;
     this.#StreetHolesModel.latitude = body.latitude;
     this.#StreetHolesModel.longitude = body.longitude;
-    this.#StreetHolesModel.imagem = {
-      data: file.imagem.data,
-      contentType: file.imagem.mimetype,
-    };
+    // this.#StreetHolesModel.imagem = {
+    //   data: file.imagem.data,
+    //   contentType: file.imagem.mimetype,
+    // };
 
     return Holes.updateOne({ id: this.#id }, this.#StreetHolesModel);
   }
