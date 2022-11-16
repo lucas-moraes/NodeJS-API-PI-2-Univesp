@@ -15,6 +15,7 @@ import {Loader} from '@components/Loader';
 
 export default function Login({navigation}) {
   const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -24,8 +25,13 @@ export default function Login({navigation}) {
     setIsLoading(true);
     SendPass(formData.email, formData.password).then(res => {
       if (res.data.isLogged) {
+        setHasError(false);
         setIsLoading(false);
         navigation.navigate('Home');
+      }
+      if (!res.data.isLogged) {
+        setIsLoading(false);
+        setHasError(true);
       }
     });
   }
@@ -40,6 +46,9 @@ export default function Login({navigation}) {
         {!isLoading ? (
           <>
             <Text style={styles.title}>Street Holes</Text>
+            {hasError && (
+              <Text style={styles.textError}>E-mail ou senha incorretos</Text>
+            )}
             <TextInput
               style={styles.input}
               placeholder="E-mail"
@@ -114,6 +123,7 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 5,
     marginBottom: 10,
+    color: THEME.COLORS.TEXT_BLACK,
   },
   button: {
     backgroundColor: THEME.COLORS.BACKGROUND_700,
@@ -127,6 +137,12 @@ const styles = StyleSheet.create({
   },
   textButton: {
     color: THEME.COLORS.TEXT,
+  },
+  textError: {
+    color: THEME.COLORS.TEXT_ERROR,
+    fontFamily: THEME.FONT_FAMILY.BOLD,
+    fontSize: THEME.FONT_SIZE.MD,
+    alignSelf: 'center',
   },
   title: {
     alignSelf: 'center',

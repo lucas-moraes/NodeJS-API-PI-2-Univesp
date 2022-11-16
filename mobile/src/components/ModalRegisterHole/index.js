@@ -148,7 +148,9 @@ export function ModalRegister(props) {
               <View style={[styles.body, {height: 150}]}>
                 <View style={styles.newBodyItems}>
                   <Text style={styles.textLabel}>Endereço: </Text>
-                  <Text style={{maxWidth: 300}}>{formData.endereco}</Text>
+                  <Text style={styles.textDescription}>
+                    {formData.endereco}
+                  </Text>
                 </View>
                 <TouchableOpacity onPress={() => HandleSendFormData()}>
                   <View style={styles.newView}>
@@ -250,6 +252,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     margin: 5,
+    color: THEME.COLORS.TEXT_BLACK,
   },
   responseContainer: {
     width: 300,
@@ -268,10 +271,16 @@ const styles = StyleSheet.create({
   },
   buttonSelect: {
     margin: 10,
+    color: THEME.COLORS.TEXT_BLACK,
   },
   textLabel: {
     fontSize: THEME.FONT_SIZE.MD,
     fontFamily: THEME.FONT_FAMILY.BOLD,
+    color: THEME.COLORS.TEXT_BLACK,
+  },
+  textDescription: {
+    maxWidth: 300,
+    color: THEME.COLORS.TEXT_BLACK,
   },
   textContext: {
     fontSize: THEME.FONT_SIZE.MD,
