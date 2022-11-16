@@ -3,6 +3,7 @@ export const THEME = {
     BACKGROUND_900: '#3c2d2c',
     BACKGROUND_800: '#644c4a',
     BACKGROUND_700: '#6e605e',
+    BACKGROUND_600: '#7d5f5d00',
     BACKGROUND_200: '#fafaf9',
 
     TEXT: '#dbd7d7',
@@ -19,13 +20,14 @@ export const THEME = {
 
     FOOTER: ['rgba(0,0,0,0)', 'rgba(0,0,0,0.9)'],
     OVERLAY: 'rgba(0,0,0,0.6)',
+    OVERLAY_LIGHT: 'rgba(255,255,255,0.4)',
   },
 
   FONT_FAMILY: {
-    REGULAR: 'Inter_400Regular',
-    SEMI_BOLD: 'Inter_600SemiBold',
-    BOLD: 'Inter_700Bold',
-    BLACK: 'Inter_900Black',
+    REGULAR: 'Inter-Regular',
+    SEMI_BOLD: 'Inter-SemiBold',
+    BOLD: 'Inter-Bold',
+    BLACK: 'Inter-Black',
   },
 
   FONT_SIZE: {

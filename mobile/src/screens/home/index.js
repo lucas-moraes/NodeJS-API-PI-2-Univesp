@@ -6,7 +6,7 @@ import {Map} from '@components/Map';
 import {ModalRegister} from '@components/ModalRegisterHole';
 import {FindAll} from '@services';
 
-export function Home() {
+export default function Home() {
   const [modal, setModal] = useState(false);
   const [locales, setLocales] = useState(null);
   const [newLocale, setNewLocale] = useState(null);
