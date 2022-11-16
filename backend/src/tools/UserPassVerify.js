@@ -1,11 +1,6 @@
 class UserPassVerify {
-  constructor(loginPass, DBPass) {
-    this.loginPass = loginPass;
-    this.DBPass = DBPass;
-  }
-
-  login() {
-    if (this.loginPass === this.DBPass) {
+  login(loginPass, DBPass) {
+    if (loginPass === DBPass) {
       return true;
     }
     return false;
