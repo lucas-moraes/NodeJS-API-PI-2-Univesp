@@ -31,7 +31,7 @@ describe("streetHole router tests", () => {
     return await request(server.app)
       .delete("/api/streetHole/deleteOne")
       .send({
-        endereco: "JEST",
+        id: "JEST",
       })
       .expect(200);
   });
@@ -40,7 +40,7 @@ describe("streetHole router tests", () => {
     return await request(server.app)
       .delete("/api/streetHole/deleteMany")
       .send({
-        endereco: "JEST",
+        id: "JEST",
       })
       .expect(200);
   });
