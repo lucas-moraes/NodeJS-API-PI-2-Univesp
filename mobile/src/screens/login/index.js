@@ -11,17 +11,23 @@ import {
 } from 'react-native';
 import {THEME} from '@themes';
 import {SendPass} from '@services';
+import {Loader} from '@components/Loader';
 
-export default function Login() {
+export default function Login({navigation}) {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
   function HandleSendlogin() {
-    SendPass(formData.email, formData.password).then(res =>
-      console.log(res.data),
-    );
+    setIsLoading(true);
+    SendPass(formData.email, formData.password).then(res => {
+      if (res.data.isLogged) {
+        setIsLoading(false);
+        navigation.navigate('Home');
+      }
+    });
   }
 
   return (
@@ -31,40 +37,49 @@ export default function Login() {
         source={require('../../assets/adaptive-icon.png')}
       />
       <View style={styles.viewer}>
-        <Text style={styles.title}>Street Holes</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="E-mail"
-          keyboardType="email-address"
-          onChangeText={text => {
-            setFormData({
-              ...formData,
-              email: text
-                .split(' ')
-                .map(word => word)
-                .join(' '),
-            });
-          }}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          keyboardType="email-address"
-          onChangeText={text => {
-            setFormData({
-              ...formData,
-              password: text
-                .split(' ')
-                .map(word => word)
-                .join(' '),
-            });
-          }}
-        />
-        <TouchableOpacity onPress={() => HandleSendlogin()}>
-          <View style={styles.button}>
-            <Text style={styles.textButton}>Entrar</Text>
-          </View>
-        </TouchableOpacity>
+        {!isLoading ? (
+          <>
+            <Text style={styles.title}>Street Holes</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="E-mail"
+              keyboardType="email-address"
+              onChangeText={text => {
+                setFormData({
+                  ...formData,
+                  email: text
+                    .split(' ')
+                    .map(word => word)
+                    .join(' '),
+                });
+              }}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Password"
+              keyboardType="email-address"
+              onChangeText={text => {
+                setFormData({
+                  ...formData,
+                  password: text
+                    .split(' ')
+                    .map(word => word)
+                    .join(' '),
+                });
+              }}
+            />
+            <TouchableOpacity onPress={() => HandleSendlogin()}>
+              <View style={styles.button}>
+                <Text style={styles.textButton}>Entrar</Text>
+              </View>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <>
+            <Text style={styles.title}>Carregando</Text>
+            <Loader />
+          </>
+        )}
       </View>
     </SafeAreaView>
   );
