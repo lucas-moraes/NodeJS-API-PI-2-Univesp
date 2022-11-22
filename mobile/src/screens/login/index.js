@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -9,11 +9,12 @@ import {
   TouchableOpacity,
   Text,
 } from 'react-native';
-import {THEME} from '@themes';
-import {SendPass} from '@services';
-import {Loader} from '@components/Loader';
+import { THEME } from '@themes';
+import { SendPass } from '@services';
+import { Loader } from '@components/Loader';
+import { Input } from '@components/TextInput';
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [formData, setFormData] = useState({
@@ -49,11 +50,10 @@ export default function Login({navigation}) {
             {hasError && (
               <Text style={styles.textError}>E-mail ou senha incorretos</Text>
             )}
-            <TextInput
-              style={styles.input}
-              placeholder="E-mail"
-              keyboardType="email-address"
-              onChangeText={text => {
+            <Input
+              PlaceHolder={'E-mail'}
+              IsPassword={false}
+              OnChangeText={text => {
                 setFormData({
                   ...formData,
                   email: text
@@ -63,11 +63,10 @@ export default function Login({navigation}) {
                 });
               }}
             />
-            <TextInput
-              style={styles.input}
-              placeholder="Password"
-              keyboardType="email-address"
-              onChangeText={text => {
+            <Input
+              PlaceHolder={'Password'}
+              IsPassword={true}
+              OnChangeText={text => {
                 setFormData({
                   ...formData,
                   password: text

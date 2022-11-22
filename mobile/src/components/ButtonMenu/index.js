@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, { useState, useRef } from 'react';
 import {
   StyleSheet,
   Animated,
@@ -7,8 +7,8 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import {Plus} from 'phosphor-react-native';
-import {THEME} from '@themes';
+import { Plus } from 'phosphor-react-native';
+import { THEME } from '@themes';
 
 export function ButtonMenu(props) {
   const [buttonColor, setButtonColor] = useState(THEME.COLORS.BACKGROUND_700);
@@ -66,7 +66,7 @@ export function ButtonMenu(props) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Animated.View style={{opacity: fade}}>
+      <Animated.View style={{ opacity: fade }}>
         <View style={styles.containerItems}>
           <TouchableOpacity onPress={() => props.onPressed()}>
             <Text style={styles.items}>Registrar buraco</Text>
@@ -75,7 +75,7 @@ export function ButtonMenu(props) {
       </Animated.View>
 
       <TouchableOpacity
-        style={[styles.button, {backgroundColor: buttonColor}]}
+        style={[styles.button, { backgroundColor: buttonColor }]}
         onPressIn={() => HandleClick()}>
         <Animated.View style={animatedStyle}>
           <Plus color={THEME.COLORS.PRIMARY} size={32} weight={'bold'} />
