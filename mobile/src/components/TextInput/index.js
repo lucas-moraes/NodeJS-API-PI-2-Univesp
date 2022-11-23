@@ -11,7 +11,7 @@ export function Input(props) {
       <TextInput
         style={styles.input}
         placeholder={props.PlaceHolder}
-        secureTextEntry={props.IsPassword && isVisible}
+        secureTextEntry={props.IsPassword && !isVisible}
         onChangeText={props.OnChangeText}
       />
       {props.IsPassword === true && (
