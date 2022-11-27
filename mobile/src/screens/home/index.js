@@ -1,10 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, SafeAreaView} from 'react-native';
-import {ButtonMenu} from '@components/ButtonMenu';
-import {Map} from '@components/Map';
-import {ModalRegister} from '@components/ModalRegisterHole';
-import {FindAll} from '@services';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, SafeAreaView } from 'react-native';
+import { ButtonMenu } from '@components/ButtonMenu';
+import { Map } from '@components/Map';
+import { ModalRegister } from '@components/ModalRegisterHole';
+import { FindAll } from '@services';
 
 export default function Home() {
   const [modal, setModal] = useState(false);
@@ -39,6 +38,6 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-  container: {flex: 1},
+  container: { flex: 1 },
   position: 'relative',
 });
